@@ -1,0 +1,16 @@
+# Environment
+.env
+venv/
+__pycache__/
+*.pyc
+
+# Generated files
+vector_store.index
+chunks.pkl
+
+# Model cache
+.cache/
+
+# OS
+.DS_Store
+Thumbs.db
