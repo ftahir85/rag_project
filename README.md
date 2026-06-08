@@ -1,10 +1,6 @@
 # RAG Document Q&A Bot
 
-A Retrieval Augmented Generation (RAG) system built from scratch in Python. Feed it a `.txt` document and ask questions about it in plain English — it answers strictly from your document, not from general AI knowledge.
-
-Built as a learning project to understand how RAG works under the hood, without using any high-level frameworks like LangChain or LlamaIndex.
-
----
+A Retrieval Augmented Generation (RAG) system built from scratch in Python. Feed it a `.txt` document and ask questions about it in plain English — it answers strictly from your document, not from general AI knowledge. At its core, an LLM (GPT-4o-mini) generates the final answer — but only after a retrieval pipeline finds the most relevant chunks from your document using cosine similarity on vector embeddings. Built as a learning project to understand how RAG works under the hood, without using any high-level frameworks like LangChain or LlamaIndex.
 
 ## Project Structure
 
