@@ -13,7 +13,8 @@ rag_project/
 ├── ingest.py        # Load .txt file and split into chunks
 ├── embedder.py      # Embed chunks using sentence-transformers, store in FAISS
 ├── retriever.py     # Embed query, search FAISS, return top matching chunks
-├── rag.py           # Main bot — retrieval + OpenAI = grounded answers
+├── rag.py           # Core RAG logic — retrieval + OpenAI generation
+├── app.py           # Streamlit chat UI
 ├── sample.txt       # Sample document used for testing
 └── .gitignore       # Keeps .env, venv, and generated files out of GitHub
 ```
@@ -29,6 +30,7 @@ rag_project/
 | `openai` | GPT-4o-mini for answer generation |
 | `python-dotenv` | Load API key securely from .env file |
 | `numpy` | Vector array operations |
+| `streamlit` | Chat web UI |
 
 ---
 
@@ -53,7 +55,7 @@ source venv/bin/activate
 
 ### 3. Install dependencies
 ```bash
-pip install sentence-transformers faiss-cpu openai python-dotenv numpy
+pip install sentence-transformers faiss-cpu openai python-dotenv numpy streamlit
 ```
 
 ### 4. Add your OpenAI API key
@@ -66,21 +68,26 @@ OPENAI_API_KEY=your_key_here
 
 ## Usage
 
-### Step 1 — Add your document
-Place a `.txt` file in the project folder.
+### Option 1 — Chat UI (Streamlit)
 
-### Step 2 — Embed the document
+```bash
+streamlit run app.py
+```
+
+Opens in your browser at `http://localhost:8501`
+
+1. Upload your `.txt` file using the sidebar
+2. Wait for "✅ embedded successfully!"
+3. Type your question in the chat box
+4. Get answers grounded in your document
+
+### Option 2 — Terminal
+
 ```bash
 python embedder.py
-```
-This creates `vector_store.index` and `chunks.pkl` — your local vector database. Run this once per document, or again whenever you change the document.
-
-### Step 3 — Run the bot
-```bash
 python rag.py
 ```
 
-### Step 4 — Ask questions
 ```
 RAG Document Q&A Bot
 Type 'quit' to exit
@@ -88,11 +95,14 @@ Type 'quit' to exit
 Your question: What are the benefits of reading?
 Answer: Reading improves memory, analytical skills, and empathy...
 
-Your question: What is deep reading?
-Answer: Deep reading involves slow, thoughtful engagement with a text...
-
 Your question: What is the capital of France?
 Answer: I don't know based on the provided document.
 ```
 
+---
 
+
+
+---
+
+*Python 3.14 — Windows 11*
